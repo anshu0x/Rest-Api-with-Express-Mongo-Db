@@ -54,9 +54,10 @@ app.delete("/students/:id", async (req, res) => {
   }
 });
 app.patch("/students/:id", async (req, res) => {
+  const user = req.body;
   try {
     const _id = req.params.id;
-    const StudentData = await Student.findOneAndDelete({ _id });
+    const StudentData = await Student.findOneAndUpdate({ _id }, user);
     if (!StudentData) {
       return res.status(404).send();
     } else {
